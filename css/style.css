@@ -22,6 +22,7 @@ body {
     width: 100%;
     padding: 20px;
     font-size: 2rem;
+    font-weight: bold;
     margin-bottom: 15px;
     text-align: right;
     border: none;
@@ -32,7 +33,7 @@ body {
 
 #buttons {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* pesquisar sobre */
+    grid-template-columns: repeat(4, 70px);
     gap: 10px;
     padding: 15px;
     background-color: #242c43;
@@ -40,7 +41,6 @@ body {
 }
 
 button {
-    width: 100px;
     height: 50px;
     border: none;
     border-radius: 10px;
@@ -50,4 +50,47 @@ button {
     font-size: 1.5rem;
     font-weight: bold;
     cursor: pointer;
+}
+
+button:hover {
+    background-color: #444b5a;
+    color: white;
+}
+
+button:active {
+    background-color: #2b2f38;
+}
+
+/* Botões de operadores */
+button.btn-operator {
+    background-color: #d13f30;
+    color: white;
+}
+
+button.btn-operator:hover {
+    background-color: #af3729;
+}
+
+button.btn-operator:active {
+    background-color: #8d2b21;
+}
+
+/* Botões de clear e igualdade */
+button.btn-clear {
+    background-color: #637198;
+    color: white;
+}
+
+button.btn-equals {
+    grid-column: span 2;
+    background-color: #637198;
+    color: white;
+}
+
+button.btn-equals:hover, button.btn-clear:hover {
+    background-color: #414a63;
+}
+
+button.btn-equals:active, button.btn-clear:active {
+    background-color: #262b3a;
 }
