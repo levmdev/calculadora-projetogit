@@ -1,5 +1,21 @@
 let displayField = document.querySelector('#current-operand');
 let calculousArray = [];
+let clearAllBtn = document.querySelector("#clear");
+clearAllBtn.addEventListener('click', () => {
+    calculousArray = [];
+    displayField.textContent = 0
+})
+
+let clearLast = document.querySelector('#clear-entry');
+clearLast.addEventListener('click', () => {
+    if(calculousArray.length > 1){
+        displayField.textContent = displayField.textContent.slice(0,-1)
+        calculousArray.pop();
+        return;
+    }
+    displayField.textContent = 0
+    calculousArray = [];
+})
 
 let numbers = document.querySelectorAll('.btn-number')
 numbers.forEach((number) => {
