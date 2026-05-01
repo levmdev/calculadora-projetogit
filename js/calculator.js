@@ -1,5 +1,15 @@
-let displayField = document.querySelector('#current-operand');
-let calculousArray = [];
+const displayField = document.querySelector('#current-operand');
+let  calculousArray = [];
+const resultBtn = document.querySelector('.btn-equals')
+let result = 0;
+
+resultBtn.addEventListener('click', () => {
+   if(calculousArray.length <= 1 || calculousArray[calculousArray.length - 1].getAttribute('data-number') == undefined) return;
+    result = eval(displayField.textContent);
+    displayField.textContent = result
+    calculousArray = []
+});
+
 let clearAllBtn = document.querySelector("#clear");
 clearAllBtn.addEventListener('click', () => {
     calculousArray = [];
@@ -22,7 +32,7 @@ numbers.forEach((number) => {
     number.addEventListener('click', () => {
         calculousArray.push(number)
         let attr = number.getAttributeNames();
-        fillScreen(number.textContent, attr[1])
+        fillScreen(parseInt(number.textContent), attr[1])
     })
 })
 
@@ -32,7 +42,7 @@ operators.forEach((operator) => {
         if(calculousArray.length > 0 && calculousArray[calculousArray.length - 1].getAttribute('data-number') == undefined) return;
         calculousArray.push(operator)
         let attr = operator.getAttributeNames();
-        fillScreen(operator.textContent, attr[1]);
+        fillScreen(operator.getAttribute('data-operator'), attr[1]);
     })
 })
 
