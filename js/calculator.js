@@ -3,9 +3,21 @@ let  calculousArray = [];
 const resultBtn = document.querySelector('.btn-equals')
 let result = 0;
 
+const isPercentOperator = (button) => {
+    return button && button.getAttribute('data-operator') === '%';
+}
+
+const normalizeExpression = (expression) => {
+    return expression.replace(/(\d+(?:\.\d+)?)%/g, '($1/100)');
+}
+
 resultBtn.addEventListener('click', () => {
-   if(calculousArray.length <= 1 || calculousArray[calculousArray.length - 1].getAttribute('data-number') == undefined) return;
-    result = eval(displayField.textContent);
+   if(calculousArray.length <= 1) return;
+
+    let lastInput = calculousArray[calculousArray.length - 1];
+    if(lastInput.getAttribute('data-number') == undefined && !isPercentOperator(lastInput)) return;
+
+    result = eval(normalizeExpression(displayField.textContent));
     displayField.textContent = result
     calculousArray = []
 });
@@ -39,7 +51,15 @@ numbers.forEach((number) => {
 let operators = document.querySelectorAll('.btn-operator')
 operators.forEach((operator) => {
     operator.addEventListener('click', () => {
-        if(calculousArray.length > 0 && calculousArray[calculousArray.length - 1].getAttribute('data-number') == undefined) return;
+        if(calculousArray.length === 0) return;
+
+        let lastInput = calculousArray[calculousArray.length - 1];
+        let lastIsNumber = lastInput.getAttribute('data-number') != undefined;
+        let lastIsPercent = isPercentOperator(lastInput);
+        let currentIsPercent = isPercentOperator(operator);
+
+        if(!lastIsNumber && !(lastIsPercent && !currentIsPercent)) return;
+
         calculousArray.push(operator)
         let attr = operator.getAttributeNames();
         fillScreen(operator.getAttribute('data-operator'), attr[1]);
