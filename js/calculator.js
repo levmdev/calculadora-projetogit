@@ -44,7 +44,7 @@ numbers.forEach((number) => {
     number.addEventListener('click', () => {
         calculousArray.push(number)
         let attr = number.getAttributeNames();
-        fillScreen(parseInt(number.textContent), attr[1])
+        fillScreen(number.textContent, attr[1])
     })
 })
 
